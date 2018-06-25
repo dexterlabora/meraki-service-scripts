@@ -1,0 +1,26 @@
+{
+  "name": "meraki-service-scripts",
+  "version": "1.0.0",
+  "description": "A collection of Cisco Meraki Dashboard API scripts using the custom meraki-service library",
+  "main": "listNetwork-vlans.js",
+  "scripts": {
+    "jsdoc": "jsdoc -c jsdoc.config.json *.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Cisco",
+    "Meraki",
+    "Dashboard",
+    "API"
+  ],
+  "author": "Cory Guynn",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "co": "^4.6.0",
+    "co-prompt": "^1.0.0",
+    "commander": "^2.15.1",
+    "json2csv": "^4.1.3",
+    "meraki-service": "file:dev/meraki-service",
+    "minimist": "^1.2.0"
+  }
+}
