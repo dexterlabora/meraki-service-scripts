@@ -135,6 +135,19 @@ CSV:
 The file was saved!
 ```
 
+## List Client for an Organization
+
+`$ node listClients-org.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -f -t 864000 clients.csv`
+
+```
+...
+CSV:
+ "id","description","mdnsName","dhcpHostname","mac","ip","vlan","switchport","device","usageSent","usageRecv","deviceSerial"
+"kb6ff2f","switch-depot-881544dff3af",,"switch-depot-881544dff3af","88:15:44:df:f3:af","192.168.128.3",0,,"{""name"":null,""serial"":""Q2QN-9J8L-SLPD"",""mac"":""e0:55:3d:17:d4:23"",""publicIp"":""64.103.26.57"",""networkId"":""N_646829496481145355"",""status"":""online"",""usingCellularFailover"":false,""wan1Ip"":""10.10.10.106"",""wan2Ip"":null}",9494.504636133699,10619.448924494354,"Q2QN-9J8L-SLPD"
+"kbbd940","me0553d1cc880",,"me0553d1cc880","e0:55:3d:1c:c8:80","192.168.128.4",0,,"{""name"":null,""serial"":""Q2QN-9J8L-SLPD"",""mac"":""e0:55:3d:17:d4:23"",""publicIp"":""64.103.26.57"",""networkId"":""N_646829496481145355"",""status"":""online"",""usingCellularFailover"":false,""wan1Ip"":""10.10.10.106"",""wan2Ip"":null}",1370.8901705244366,1874.8223815484453,"Q2QN-9J8L-SLPD"
+...
+```
+
 # LICENSE
 
 Apache-2.0
