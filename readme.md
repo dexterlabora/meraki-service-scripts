@@ -9,7 +9,7 @@ Uses the Meraki-Service library.
 
 # Examples
 
-##Get Help
+## Get Help
 
 ```
 $ node listNetwork-vlans.js -h
@@ -162,6 +162,25 @@ CSV:
  "id","description","mdnsName","dhcpHostname","mac","ip","vlan","switchport","device","usageSent","usageRecv","deviceSerial"
 "kb6ff2f","switch-depot-881544dff3af",,"switch-depot-881544dff3af","88:15:44:df:f3:af","192.168.128.3",0,,"{""name"":null,""serial"":""Q2QN-9J8L-SLPD"",""mac"":""e0:55:3d:17:d4:23"",""publicIp"":""64.103.26.57"",""networkId"":""N_646829496481145355"",""status"":""online"",""usingCellularFailover"":false,""wan1Ip"":""10.10.10.106"",""wan2Ip"":null}",9494.504636133699,10619.448924494354,"Q2QN-9J8L-SLPD"
 "kbbd940","me0553d1cc880",,"me0553d1cc880","e0:55:3d:1c:c8:80","192.168.128.4",0,,"{""name"":null,""serial"":""Q2QN-9J8L-SLPD"",""mac"":""e0:55:3d:17:d4:23"",""publicIp"":""64.103.26.57"",""networkId"":""N_646829496481145355"",""status"":""online"",""usingCellularFailover"":false,""wan1Ip"":""10.10.10.106"",""wan2Ip"":null}",1370.8901705244366,1874.8223815484453,"Q2QN-9J8L-SLPD"
+...
+```
+
+## List Devices of an Organization and their status
+
+`$ node listDeviceStatuses.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -f devices.csv`
+
+```
+...
+CSV:
+ "name","serial","mac","publicIp","networkId","status","usingCellularFailover","wan1Ip","wan2Ip","lanIp"
+,"Q2QN-9J8L-SLPD","e0:55:3d:17:d4:23","64.103.26.57","N_646829496481145355","online",false,"10.10.10.106",,
+,"Q2QN-F2KR-YVC3","e0:55:3d:70:a6:c5","64.103.26.57","N_646829496481145356","online",false,"10.10.30.104",,
+,"Q2QN-WPR6-UJPL","e0:55:3d:17:d5:1a","64.103.26.57","N_646829496481145357","online",false,"10.10.10.108",,
+,"Q2QN-WS5Y-DN8E","e0:55:3d:70:ad:86","64.103.26.57","N_646829496481145358","online",false,"10.10.10.109",,
+,"Q2QN-WVV9-W4KK","e0:55:3d:17:c6:87","64.103.26.57","N_646829496481145359","online",false,"10.10.10.111",,
+,"Q2QN-XPL2-2MPN","e0:55:3d:70:a4:d7","64.103.26.57","N_646829496481145360","online",false,"10.10.10.112",,
+,"Q2BV-NZ63-KCSW","e0:55:3d:84:a3:65",,"N_646829496481145361","offline",,,,
+,"Q2BV-NJY8-P6KV","e0:55:3d:84:a3:67",,"N_646829496481145361","offline",,,,
 ...
 ```
 
