@@ -1,5 +1,5 @@
 /*
-Traverse the Meraki Dashboard API to display the Clients and Group Policies for each device in a network.
+List the Templates of an Organization
 
 /*
  * $ node listTemplates.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -f templates.csv

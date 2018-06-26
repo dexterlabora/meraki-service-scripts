@@ -2,7 +2,7 @@
 List the devices in an organization and their current status.
 
 /*
- * $ node listDevices-org.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -f devices.csv
+ * $ node listDeviceStatuses.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -f devices.csv
 */
 
 var program = require("commander");
