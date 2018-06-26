@@ -42,7 +42,24 @@ CSV:
 The file was saved!
 ```
 
-## List Network VLAN, Subnet and Template Details for an Organization
+## List Networks of an Organization
+
+`$ node listNetworks.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -f networks.csv`
+
+```
+...
+CSV:
+ "id","organizationId","name","timeZone","tags","type","configTemplateId"
+"N_646829496481145308","549236","SM - Corp","America/Los_Angeles"," Sandbox ","systems manager",
+"N_646829496481145309","549236","SM - Branch","America/Los_Angeles"," Sandbox ","systems manager",
+"N_646829496481145355","549236","MX65 Depot - 1","America/Los_Angeles"," Sandbox ","appliance",
+"N_646829496481145356","549236","MX65 Depot - 2","America/Los_Angeles"," Sandbox ","appliance",
+"N_646829496481145357","549236","MX65 Depot - 3","America/Los_Angeles"," Sandbox ","appliance",
+"N_646829496481145358","549236","MX65 Depot - 4","Etc/Greenwich"," Sandbox ","appliance","L_646829496481093191"
+...
+```
+
+## List Network VLAN, Subnet and Template Details of an Organization
 
 `$ node listTemplates.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -f templates.csv`
 
@@ -58,7 +75,7 @@ CSV:
 "L_646829496481093191","Sandbox Template"
 ```
 
-## List Networks and VLAN information
+## List Networks and VLAN information of an Organization
 
 `$ node listNetwork-vlans.js -a 2f301bccd61b6c642BoGuS76e5eb66ebd170f -o 549236 -f nets-vlans.csv`
 
