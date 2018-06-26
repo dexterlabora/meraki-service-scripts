@@ -152,9 +152,9 @@ CSV:
 The file was saved!
 ```
 
-## List Client for an Organization
+## List Client of an Organization
 
-`$ node listClients-org.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -f -t 864000 clients.csv`
+`$ node listClients-org.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -t 864000 -f clients.csv`
 
 ```
 ...
