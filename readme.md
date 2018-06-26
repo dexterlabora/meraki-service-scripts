@@ -9,7 +9,7 @@ Uses the Meraki-Service library.
 
 # Examples
 
-**Get Help**
+##Get Help
 
 ```
 $ node listNetwork-vlans.js -h
@@ -26,7 +26,7 @@ $ node listNetwork-vlans.js -h
 
 _Print the JSON data and optionally export a CSV file._
 
-**List Organizations**
+## List Organizations
 
 `$ node listOrgs.js -a 2f301bccd61b6c642BoGuS76e5eb66ebd170f -f orgs.csv`
 
@@ -42,7 +42,23 @@ CSV:
 The file was saved!
 ```
 
-**List Networks and VLAN information**
+## List Network VLAN, Subnet and Template Details for an Organization
+
+`$ node listTemplates.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -f templates.csv`
+
+```
+Templates:
+ [ { id: 'L_646829496481099061', name: 'testhy' },
+  { id: 'L_646829496481099000', name: 'Sandbox Template 2' },
+  { id: 'L_646829496481093191', name: 'Sandbox Template' } ]
+CSV:
+ "id","name"
+"L_646829496481099061","testhy"
+"L_646829496481099000","Sandbox Template 2"
+"L_646829496481093191","Sandbox Template"
+```
+
+## List Networks and VLAN information
 
 `$ node listNetwork-vlans.js -a 2f301bccd61b6c642BoGuS76e5eb66ebd170f -o 549236 -f nets-vlans.csv`
 
