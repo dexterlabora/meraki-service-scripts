@@ -41,6 +41,7 @@ $ node listNetwork-vlans.js -h
 ## List Organizations
 
 _Print the JSON data and optionally export a CSV file._
+
 `$ node listOrgs.js -a 2f301bccd61b6c642BoGuS76e5eb66ebd170f -f orgs.csv`
 
 ```
