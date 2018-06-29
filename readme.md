@@ -7,7 +7,21 @@ Uses the Meraki-Service library.
 - Included in /dev/meraki-service
 - or repo at https://github.com/dexterlabora/meraki-service
 
-# Examples
+# Pre-requisites
+
+- NodeJS >= v8.1 [Download](https://nodejs.org/en/download/)
+
+# Install
+
+```
+git clone https://github.com/dexterlabora/meraki-service-scripts.git
+cd meraki-service-scripts
+npm install
+```
+
+# Usage
+
+Be sure to update the API key, denoted by the `-a` with your own Meraki API key.
 
 ## Get Help
 
@@ -24,10 +38,9 @@ $ node listNetwork-vlans.js -h
     -h, --help             output usage information
 ```
 
-_Print the JSON data and optionally export a CSV file._
-
 ## List Organizations
 
+_Print the JSON data and optionally export a CSV file._
 `$ node listOrgs.js -a 2f301bccd61b6c642BoGuS76e5eb66ebd170f -f orgs.csv`
 
 ```
