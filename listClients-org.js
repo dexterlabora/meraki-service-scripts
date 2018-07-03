@@ -32,7 +32,9 @@ async function main() {
   const networks = await meraki.getNetworks(orgId).then(res => res);
 
   // Get clients
-  let clients = await meraki.getClientsForOrg(orgId, timespan).then(res => res);
+  const clients = await meraki
+    .getClientsForOrg(orgId, timespan)
+    .then(res => res);
 
   // Format client data
   const clientsFormatted = clients.map(c => {
