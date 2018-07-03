@@ -1,0 +1,24 @@
+"number","name","enabled","splashPage","ssidAdminAccessible","authMode","psk","encryptionMode","wpaEncryptionMode","ipAssignmentMode","walledGardenEnabled","walledGardenRanges","minBitrate","bandSelection","perClientBandwidthLimitUp","perClientBandwidthLimitDown","radiusServers","radiusAccountingEnabled","radiusAccountingServers","radiusCoaEnabled","radiusAttributeForGroupPolicies","radiusFailoverPolicy","radiusLoadBalancingPolicy"
+0,".MEWS",true,"Click-through splash page",false,"psk","meraki81","wpa","WPA2 only","NAT mode",true,"*.herokuapp.com
+*.bootstrapcdn.com
+192.168.0.113/32
+ngrok.io",12,"Dual band operation",500,500,,,,,,,
+1,".meraki-sponsor",true,"Sponsored guest",false,"psk","meraki123","wpa","WPA2 only","NAT mode",true,"1.2.3.4/32",11,"Dual band operation",0,0,,,,,,,
+2,"excap-dhiren-signon",false,"Password-protected with Meraki RADIUS",false,"open",,,,"NAT mode",true,"1.2.3.4/32
+*.internetoflego.com",11,"Dual band operation",0,0,,,,,,,
+3,"Eleven Meeting-Demo",true,"Password-protected with custom RADIUS",false,"open",,,,"NAT mode",true,"secure.11os.com
+secure.guestinternet.com
+content.guestinternet.com
+www.elevenwireless.com",11,"Dual band operation",0,0,"[{""host"":""rad.11os.com"",""port"":1812}]",true,"[{""host"":""rad.11os.com"",""port"":1813}]",,"Filter-Id","Deny access","Strict priority order"
+4,"ElevenDemo",true,"None",false,"open",,,,"NAT mode",,,11,"Dual band operation",0,0,,,,,,,
+5,".TorchFi Room Service",true,"Click-through splash page",false,"open",,,,"NAT mode",true,"*.torchfi.com
+*.trch.in",11,"Dual band operation",2048,2048,,,,,,,
+6,"Unconfigured SSID 7",false,"None",false,"open",,,,"NAT mode",,,11,"Dual band operation",0,0,,,,,,,
+7,"Unconfigured SSID 8",false,"None",false,"open",,,,"NAT mode",,,11,"Dual band operation",0,0,,,,,,,
+8,"Unconfigured SSID 9",false,"None",false,"open",,,,"NAT mode",,,11,"Dual band operation",0,0,,,,,,,
+9,"Unconfigured SSID 10",false,"None",false,"open",,,,"NAT mode",,,11,"Dual band operation",0,0,,,,,,,
+10,"Unconfigured SSID 11",false,"None",false,"open",,,,"NAT mode",,,11,"Dual band operation",0,0,,,,,,,
+11,"Unconfigured SSID 12",false,"None",false,"open",,,,"NAT mode",,,11,"Dual band operation",0,0,,,,,,,
+12,"Unconfigured SSID 13",false,"None",false,"open",,,,"NAT mode",,,11,"Dual band operation",0,0,,,,,,,
+13,"Unconfigured SSID 14",false,"None",false,"open",,,,"NAT mode",,,11,"Dual band operation",0,0,,,,,,,
+14,"Unconfigured SSID 15",false,"None",false,"open",,,,"NAT mode",,,11,"Dual band operation",0,0,,,,,,,

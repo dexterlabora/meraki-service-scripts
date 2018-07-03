@@ -1,5 +1,4 @@
 node_modules
 /dev/meraki-service/node_modules
-*.csv
 test-sandbox.cory.sh
 .gitignore
