@@ -24,6 +24,7 @@ async function main() {
   // Get Networks
   const orgId = program.orgId;
   let networks = await meraki.getNetworks(orgId).then(res => res);
+  console.log("Networks: ", networks);
 
   // Write CSV to File
   const csv = require("./js/writeCSVfile");

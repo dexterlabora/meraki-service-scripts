@@ -23,31 +23,13 @@ const API_URL = "https://api.meraki.com/api/v0";
 const meraki = new Meraki(program.apiKey, API_URL);
 console.log("API Base URL: ", API_URL);
 
-// CSV Handlers
-const json2csv = require("json2csv").parse;
-
-function writeCSVfile(data, file) {
-  try {
-    let fields = Object.keys(data[0]); // use first object params as headers
-    let csv = json2csv(data, fields);
-    console.log("CSV: \n", csv);
-
-    console.log(`\n writing file ${file}`);
-    var fs = require("fs");
-    fs.writeFile(`${file}`, csv, function(err) {
-      if (err) {
-        return console.log("file save error", err);
-      }
-      console.log("The file was saved!");
-    });
-  } catch (error) {
-    console.log("Error writing CSV file", error);
-  }
-}
-
 // Primary Script
-async function main(apiKey, orgId, timespan, file) {
+async function main() {
+  const orgId = program.orgId;
+  const timespan = program.timespan;
+
   // Get Clients
+  /*
   let clients = await meraki.getClientsForOrg(orgId, timespan).then(
     res => {
       console.log("Clients: \n", res);
@@ -64,12 +46,29 @@ async function main(apiKey, orgId, timespan, file) {
       console.log(err);
     }
   );
+  */
+  // Get networks
+  const networks = await meraki.getNetworks(orgId).then(res => res);
 
+  let clients = await meraki.getClientsForOrg(orgId, timespan).then(res => res);
+  const clientsFormatted = clients.map(c => {
+    c.usageSent = c.usage.sent;
+    c.usageRecv = c.usage.recv;
+    delete c.usage;
+    c.deviceSerial = c.device.serial;
+    c.networkId = c.device.networkId;
+    c.networkName = networks.find(n => n.id === c.networkId);
+    return c;
+  });
+
+  console.log("Clients: ", clients);
   // Write CSV to File
+  const csv = require("./js/writeCSVfile");
+  let file = program.file;
   if (file) {
-    writeCSVfile(clients, file);
+    csv.writeCSVfile(clientsFormatted, file);
   }
 }
 
 // Launch main script
-main(program.apiKey, program.orgId, program.timespan, program.file);
+main();
