@@ -1,8 +1,8 @@
 /*
-List the devices in an organization and their current status.
+Traverse the Meraki Dashboard API to display the Clients of an Organization in a given timespan.
 
 /*
- * $ node listDeviceStatuses.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -f devices.csv
+ * $ node listSSIDs-org.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -f ssids-org-sandbox.csv
 */
 
 var program = require("commander");
@@ -42,29 +42,38 @@ function writeCSVfile(data, file) {
 }
 
 // Primary Script
-async function main(apiKey, orgId, file) {
-  // Get Networks
-  let networks = await meraki.getNetworks(orgId).then(res => res);
-  console.log("Networks", networks);
+async function main() {
+  const orgId = program.orgId;
+  const file = program.file;
+  let ssidsOrg = [];
 
-  // Get Devices
-  let devices = await meraki.getOrgDevices(orgId).then(res => res);
+  // Get networks
+  const networks = await meraki.getNetworks(orgId).then(res => res);
 
-  // Add network info to data
-  devicesWithNetName = devices.map(d => {
-    let network = networks.find(n => n.id === d.networkId);
-    d.networkName = network.name;
-    d.networkTags = network.tags;
-    d.networkTimeZone = network.timeZone;
-    return d;
-  });
-  console.log("Devices with network info", devicesWithNetName);
+  // Get SSIDs for each network and merge data
+  // errors will be thrown for networks that do not support wireless
+  for (let n of networks) {
+    const ssids = await meraki.getSsids(n.id).then(res => res);
+
+    console.log("network ssids", n.id, ssids);
+    if (!ssids) {
+      continue;
+    }
+    ssids.map(s => {
+      s.networkId = n.id;
+      s.networkName = n.name;
+      s.networkTemplateId = n.configTemplateId;
+      return s;
+    });
+
+    ssidsOrg = [...ssidsOrg, ...ssids];
+  }
 
   // Write CSV to File
-  if (file) {
-    writeCSVfile(devicesWithNetName, file);
+  if (program.file) {
+    writeCSVfile(ssidsOrg, file);
   }
 }
 
 // Launch main script
-main(program.apiKey, program.orgId, program.file);
+main();

@@ -1,5 +1,5 @@
 /*
- * $ node listNetwork - vlans.js - a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f - o 549236 - f test.csv
+ * $ node listNetwork-vlans.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -o 549236 -f test.csv
  * 
  * 
  * This will generate a report of the MX VLAN and subnet information for an organization, along with the applied templates. 

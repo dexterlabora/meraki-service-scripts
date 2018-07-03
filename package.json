@@ -20,7 +20,7 @@
     "co-prompt": "^1.0.0",
     "commander": "^2.15.1",
     "json2csv": "^4.1.3",
-    "meraki-service": "file:dev/meraki-service",
+    "meraki-service": "git+https://github.com/dexterlabora/meraki-service.git",
     "minimist": "^1.2.0"
   }
 }

@@ -1,8 +1,8 @@
 /*
-List the devices in an organization and their current status.
+Traverse the Meraki Dashboard API to display the Clients of an Organization in a given timespan.
 
 /*
- * $ node listDeviceStatuses.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -f devices.csv
+ * $ node listSSIDs-net.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -f ssids-net-sandbox.csv
 */
 
 var program = require("commander");
@@ -10,7 +10,7 @@ var program = require("commander");
 program
   .option("-f, --file <file>", "CSV file to write")
   .option("-a, --apiKey <apiKey>", "The Meraki API Key")
-  .option("-o, --orgId <orgId>", "The organization ID")
+  .option("-n, --netId <netId>", "The network ID")
   .parse(process.argv);
 
 // Meraki API Service
@@ -42,29 +42,15 @@ function writeCSVfile(data, file) {
 }
 
 // Primary Script
-async function main(apiKey, orgId, file) {
-  // Get Networks
-  let networks = await meraki.getNetworks(orgId).then(res => res);
-  console.log("Networks", networks);
-
-  // Get Devices
-  let devices = await meraki.getOrgDevices(orgId).then(res => res);
-
-  // Add network info to data
-  devicesWithNetName = devices.map(d => {
-    let network = networks.find(n => n.id === d.networkId);
-    d.networkName = network.name;
-    d.networkTags = network.tags;
-    d.networkTimeZone = network.timeZone;
-    return d;
-  });
-  console.log("Devices with network info", devicesWithNetName);
+async function main() {
+  // Get SSIDs
+  const ssids = await meraki.getSsids(program.netId).then(res => res);
 
   // Write CSV to File
-  if (file) {
-    writeCSVfile(devicesWithNetName, file);
+  if (program.file) {
+    writeCSVfile(ssids, program.file);
   }
 }
 
 // Launch main script
-main(program.apiKey, program.orgId, program.file);
+main();

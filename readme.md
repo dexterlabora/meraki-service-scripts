@@ -58,7 +58,7 @@ The file was saved!
 
 ## List Networks of an Organization
 
-`$ node listNetworks.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -f networks.csv`
+`$ node listNetworks.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -o 234567 -f networks.csv`
 
 ```
 ...
@@ -75,7 +75,7 @@ CSV:
 
 ## List Network VLAN, Subnet and Template Details of an Organization
 
-`$ node listTemplates.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -f templates.csv`
+`$ node listTemplates.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -o 234567 -f templates.csv`
 
 ```
 Templates:
@@ -91,7 +91,7 @@ CSV:
 
 ## List Networks and VLAN information of an Organization
 
-`$ node listNetwork-vlans.js -a 2f301bccd61b6c642BoGuS76e5eb66ebd170f -o 549236 -f nets-vlans.csv`
+`$ node listNetwork-vlans.js -a 2f301bccd61b6c642BoGuS76e5eb66ebd170f -o 234567 -f nets-vlans.csv`
 
 ```
 API Base URL:  https://api.meraki.com/api/v0
@@ -168,7 +168,7 @@ The file was saved!
 
 ## List Client of an Organization
 
-`$ node listClients-org.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -t 864000 -f clients.csv`
+`$ node listClients-org.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -o 234567 -t 864000 -f clients.csv`
 
 ```
 ...
@@ -181,7 +181,7 @@ CSV:
 
 ## List Devices of an Organization and their status
 
-`$ node listDeviceStatuses.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -f devices.csv`
+`$ node listDeviceStatuses.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -o 234567 -f devices.csv`
 
 ```
 ...
@@ -195,6 +195,44 @@ CSV:
 ,"Q2QN-XPL2-2MPN","e0:55:3d:70:a4:d7","64.103.26.57","N_646829496481145360","online",false,"10.10.10.112",,
 ,"Q2BV-NZ63-KCSW","e0:55:3d:84:a3:65",,"N_646829496481145361","offline",,,,
 ,"Q2BV-NJY8-P6KV","e0:55:3d:84:a3:67",,"N_646829496481145361","offline",,,,
+...
+```
+
+## List SSIDs of an Organization
+
+`$ node listSSIDs-org.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -o 234567-f ssids-org-sandbox.csv`
+
+```
+...
+CSV:
+1,".meraki-sponsor",true,"Sponsored guest",false,"psk","NAT mode",11,"Dual band operation",0,0,"N_646829496481145383","Hotel WiFi - 1",,"meraki123","wpa","WPA2 only",true,"1.2.3.4/32",,,,,,,,,
+2,"excap-test-signon",false,"Password-protected with Meraki RADIUS",false,"open","NAT mode",11,"Dual band operation",0,0,"N_646829496481145383","Hotel WiFi - 1",,,,,true,"1.2.3.4/32
+*.internetoflego.com",,,,,,,,,
+...
+1,"excap-fred",true,"Click-through splash page",false,"8021x-radius","Bridge mode",18,"5 GHz band only",0,0,"L_646829496481099453","sandbox net","L_646829496481093191",,"wpa-eap","WPA2 only",true,"127.0.0.1/32","[{""host"":""52.32.144.13"",""port"":1086},{""host"":""52.89.26.115"",""port"":1086}]",false,,false,"Filter-Id",,,false,false
+2,"excap-3,"excap-bill",true,"Password-protected with Meraki RADIUS",false,"open","Bridge mode",1,"Dual band operation",0,0,"L_646829496481099453","sandbox net","L_646829496481093191",,,,true,"127.0.0.1/32",,,,,,,,false,
+4,"IoL-signon",false,"Click-through splash page",false,"open","Bridge mode",1,"Dual band operation",0,0,"L_646829496481099453","sandbox net","L_646829496481093191",,,,true,"127.0.0.1/32",,,,,,,,false,
+5,"IoL-click",false,"Click-through splash page",false,"psk","Bridge mode",1,"Dual band operation",0,0,"L_646829496481099453","sandbox net","L_646829496481093191","ikarem","wpa","WPA2 only",true,"127.0.0.1/32",,,,,,,,false,
+6,"excap-house",false,"Click-through splash page",false,"open","Bridge mode",1,"Dual band operation",0,0,"L_646829496481099453","sandbox net","L_646829496481093191",,,,true,"127.0.0.1/32",,,,,,,,false,
+7,"excap-co",false,"Password-protected with Meraki RADIUS",false,"open","Bridge mode",1,"Dual band operation",0,0,"L_646829496481099453","sandbox net","L_646829496481093191",,,,true,"127.0.0.1/32",,,,,,,,false,
+8,"excap-miles",false,"Click-through splash page",false,"open","Bridge mode",1,"Dual band operation",0,0,"L_646829496481099453","sandbox net","L_646829496481093191",,,,true,"127.0.0.1/32",,,,,,,,false,philzy",true,"Click-through splash page",false,"open","Bridge mode",18,"5 GHz band only",0,0,"L_646829496481099453","miles-life","L_646829496481093191",,,,true,"127.0.0.1/32",,,,,,,,false,
+
+...
+```
+
+## List SSIDs of a Network
+
+`$ node listSSIDs-org.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -n N_1234567890 -f ssids-org-sandbox.csv`
+
+```
+...
+CSV:
+1,"excap-fred",true,"Click-through splash page",false,"8021x-radius","Bridge mode",18,"5 GHz band only",0,0,"L_646829496481099453","sandbox net","L_646829496481093191",,"wpa-eap","WPA2 only",true,"127.0.0.1/32","[{""host"":""52.32.144.13"",""port"":1086},{""host"":""52.89.26.115"",""port"":1086}]",false,,false,"Filter-Id",,,false,false
+2,"excap-miles",true,"Click-through splash page",false,"open","Bridge mode",18,"5 GHz band only",0,0,"L_646829496481099453","sandbox net","L_646829496481093191",,,,true,"127.0.0.1/32",,,,,,,,false,
+3,"excap-bob",true,"Password-protected with Meraki RADIUS",false,"open","Bridge mode",1,"Dual band operation",0,0,"L_646829496481099453","sandbox net","L_646829496481093191",,,,true,"127.0.0.1/32",,,,,,,,false,
+4,"IoL-signon",false,"Click-through splash page",false,"open","Bridge mode",1,"Dual band operation",0,0,"L_646829496481099453","sandbox net","L_646829496481093191",,,,true,"127.0.0.1/32",,,,,,,,false,
+5,"IoL-click",false,"Click-through splash page",false,"psk","Bridge mode",1,"Dual band operation",0,0,"L_646829496481099453","sandbox net","L_646829496481093191","ikarem123!","wpa","WPA2 only",true,"127.0.0.1/32",,,,,,,,false,
+6,"excap-test",false,"Click-through splash page",false,"open","Bridge mode",1,"Dual band operation",0,0,"L_646829496481099453","sandbox net","L_646829496481093191",,,,true,"127.0.0.1/32",,,,,,,,false,
 ...
 ```
 
