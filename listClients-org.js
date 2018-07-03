@@ -28,40 +28,25 @@ async function main() {
   const orgId = program.orgId;
   const timespan = program.timespan;
 
-  // Get Clients
-  /*
-  let clients = await meraki.getClientsForOrg(orgId, timespan).then(
-    res => {
-      console.log("Clients: \n", res);
-      // flatten important paramaters. leave device details as raw JSON
-      res.map(c => {
-        c.usageSent = c.usage.sent;
-        c.usageRecv = c.usage.recv;
-        delete c.usage;
-        c.deviceSerial = c.device.serial;
-      });
-      return res;
-    },
-    err => {
-      console.log(err);
-    }
-  );
-  */
   // Get networks
   const networks = await meraki.getNetworks(orgId).then(res => res);
 
+  // Get clients
   let clients = await meraki.getClientsForOrg(orgId, timespan).then(res => res);
+
+  // Format client data
   const clientsFormatted = clients.map(c => {
     c.usageSent = c.usage.sent;
     c.usageRecv = c.usage.recv;
     delete c.usage;
     c.deviceSerial = c.device.serial;
     c.networkId = c.device.networkId;
-    c.networkName = networks.find(n => n.id === c.networkId);
+    const network = networks.find(n => n.id === c.networkId);
+    c.networkName = network.name;
     return c;
   });
-
   console.log("Clients: ", clients);
+
   // Write CSV to File
   const csv = require("./js/writeCSVfile");
   let file = program.file;
