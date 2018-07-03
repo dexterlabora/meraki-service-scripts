@@ -1,5 +1,5 @@
 /*
- * $ node listNetwork-vlans.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -o 549236 -f test.csv
+ * $ node listVlans-org.js -a 2f301bccd61b6c6BOGUSf76e5eb66ebd170f -o 549236 -f test.csv
  * 
  * 
  * This will generate a report of the MX VLAN and subnet information for an organization, along with the applied templates. 
@@ -51,88 +51,67 @@ const API_URL = "https://api.meraki.com/api/v0";
 const meraki = new Meraki(program.apiKey, API_URL);
 console.log("API Base URL: ", API_URL);
 
-// CSV Handlers
-const json2csv = require("json2csv").parse;
-
-function writeCSVfile(data, file) {
-  let fields = Object.keys(data[0]); // use first object params as headers
-  let csv = json2csv(data, fields);
-  console.log("CSV: \n", csv);
-
-  console.log(`\n writing file ${file}`);
-  var fs = require("fs");
-  fs.writeFile(`${file}`, csv, function(err) {
-    if (err) {
-      return console.log("file save error", err);
-    }
-    console.log("The file was saved!");
-  });
-}
-
 // Meraki Handlers
-async function fetchNetworks(orgId) {
-  const nets = await meraki.getNetworks(orgId).then(
-    res => {
-      console.log("Networks: ", res);
-      return res;
-    },
-    err => {
-      console.log(err);
-    }
-  );
-  return nets;
-}
 
 async function fetchVlans(nets) {
+  console.log("fetchNets nets", nets);
+  if (!nets) {
+    throw "missing networks";
+  }
   console.log("\n Getting VLAN information..");
   let allVlans = [];
-  if (nets[0].id) {
+  if (nets) {
     for (let n of nets) {
-      const vlans = await meraki.getVlans(n.id).then(
-        res => {
-          //console.log(`Vlans for ${n.name} | ID: ${n.id}`, res);
-          if (res.length >= 0) {
-            allVlans = [...allVlans, ...res];
-          }
-          return res;
-        },
-        err => {
-          console.log("script error: ", err);
-        }
-      );
+      const vlans = await meraki.getVlans(n.id).then(res => res);
+      if (vlans.length >= 0) {
+        allVlans = [...allVlans, ...vlans];
+      }
     }
-  } else {
-    console.log("No networks found. Is your org ID and API key correct?");
-    return;
   }
   return allVlans;
 }
 
 // Primary Script
-async function main(apiKey, orgId, file) {
-  // Get Networks
-  const nets = await fetchNetworks(orgId);
+async function main() {
+  const orgId = program.orgId;
 
-  // Retrieve VLANs for every network
-  const vlans = await fetchVlans(nets);
+  // Get Networks
+  const networks = await meraki.getNetworks(orgId).then(res => res);
+  console.log("Networks: ", networks);
+
+  // Get Template Info
+  const templates = await meraki.getConfigTemplates(orgId).then(res => res);
+  console.log("Templates: ", templates);
+
+  // Get VLANs for every network
+  let vlans = await fetchVlans(networks);
 
   // attach template and network name info to results
   vlans.map(v => {
-    let net = nets.filter(obj => obj.id == v.networkId)[0];
+    // attach network name
+    let net = networks.filter(n => n.id === v.networkId)[0];
+    console.log("attach network name net", net);
     v.networkName = net.name;
+
+    // attach template name
     if (net.configTemplateId) {
       v.configTemplateId = net.configTemplateId;
+      let template = templates.filter(t => t.id === v.configTemplateId)[0];
+      v.configTemplateName = template.name;
     }
+    return v;
   });
 
   // Print Final Results
   console.log("VLANS with Network Template Info", vlans);
 
   // Write CSV to File
+  const csv = require("./js/writeCSVfile");
+  let file = program.file;
   if (file) {
-    writeCSVfile(vlans, file);
+    csv.writeCSVfile(vlans, file);
   }
 }
 
 // Launch main script
-main(program.apiKey, program.orgId, program.file);
+main();
